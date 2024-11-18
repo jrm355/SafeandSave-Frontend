@@ -1,36 +1,11 @@
-body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-  background-color: #fdf5e6;
-}
-
-.navbar {
-  position: sticky;
-  top: 0;
-  background-color: #87ceeb;
-  padding: 10px;
-  display: flex;
-  justify-content: space-around;
-  z-index: 1000;
-}
-
-.navbar a {
-  color: black;
-  text-decoration: none;
-  font-weight: bold;
-}
-
-.header {
-  text-align: center;
-  padding: 20px;
-  background-color: #f0e68c;
-}
-
+/* app.css */
 .main-content {
   display: flex;
   justify-content: center;
-  align-items: center;
-  height: 70vh;
+  align-items: flex-start; /* Align content to the top */
+  flex-grow: 1;
+  padding: 20px;
+  min-height: calc(100vh - 70px); /* Account for navbar height */
 }
 
 .login-container {
@@ -38,37 +13,7 @@ body {
   padding: 20px;
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-.login-container h2 {
-  margin-bottom: 20px;
-}
-
-.login-container form div {
-  margin-bottom: 15px;
-}
-
-.login-container label {
-  display: block;
-  margin-bottom: 5px;
-}
-
-.login-container input {
+  max-width: 400px;
   width: 100%;
-  padding: 8px;
-  box-sizing: border-box;
-}
-
-.login-container button {
-  background-color: #87ceeb;
-  border: none;
-  padding: 10px;
-  width: 100%;
-  font-weight: bold;
-  cursor: pointer;
-}
-
-.login-container button:hover {
-  background-color: #4682b4;
-  color: white;
+  margin: 0 auto; /* Center it horizontally */
 }

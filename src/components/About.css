@@ -1,0 +1,50 @@
+.about-container {
+    padding: 20px;
+    background-color: #f0f8ff; /* Light blue background */
+    color: #333;
+    font-family: Arial, sans-serif;
+  }
+  
+  /* Header Styling */
+  .about-header {
+    text-align: center;
+    background-color: #87ceeb;
+    padding: 20px;
+    color: #fff;
+    font-size: 24px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+  }
+  
+  /* Content Sections */
+  .about-content {
+    display: flex;
+    justify-content: space-around;
+    gap: 20px;
+  }
+  
+  .about-section {
+    width: 45%;
+    background-color: #b0e0e6;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .about-section h2 {
+    text-align: center;
+    margin-bottom: 10px;
+  }
+  
+  .about-section ul {
+    list-style: disc inside;
+  }
+  
+  .about-section li {
+    margin-bottom: 10px;
+  }
+  
+  .about-section p {
+    margin-top: 10px;
+    line-height: 1.5;
+  }
