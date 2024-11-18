@@ -1,2 +1,1 @@
-npm create@vite latest .    
-npm i
+npm create@vite latest .    , npm i
