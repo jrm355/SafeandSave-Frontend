@@ -1,23 +1,33 @@
 import React, { useState } from "react";
 
 const DogSafety = () => {
-  const [food, setFood] = useState("");
-  const [result, setResult] = useState(null);
-  const [error, setError] = useState(null);
+  const [food, setFood] = useState(""); // For food input
+  const [result, setResult] = useState(null); // To store result from backend
+  const [error, setError] = useState(null); // For error messages
 
   const checkFoodSafety = async () => {
-    // Replace with a real API URL if available
-    const mockAPI = `https://api.example.com/dog-safety?food=${food}`; 
-
     try {
-      // Simulate API call (replace with fetch for real API)
-      const response = await fetch(mockAPI);
-      if (!response.ok) throw new Error("Failed to fetch data");
+      // Replace with your backend URL (running on localhost:3001 in this example)
+      const response = await fetch(`/Dog?food=${food.trim()}`);
       
+      if (!response.ok) throw new Error("Failed to fetch data");
+
       const data = await response.json();
-      // Assuming API returns { food: "grapes", safe: false }
-      setResult(data);
-      setError(null);
+
+      // If no food found, show an error
+      if (data.length === 0) {
+        setError("Food not found in the database.");
+        setResult(null);
+      } else {
+        // Assuming that the result will be an array with one item
+        const foodItem = data[0];
+        setResult({
+          food: foodItem.name,
+          safetyRating: foodItem.SafetyRating,
+          safetyDescription: foodItem.safetyDescription
+        });
+        setError(null);
+      }
     } catch (err) {
       setError("Could not determine food safety. Please try again.");
       setResult(null);
@@ -46,10 +56,15 @@ const DogSafety = () => {
         onChange={handleInputChange}
         style={{ padding: "0.5rem", width: "300px" }}
       />
-      <button onClick={handleCheckClick} style={{ marginLeft: "1rem", padding: "0.5rem" }}>
+      <button
+        onClick={handleCheckClick}
+        style={{ marginLeft: "1rem", padding: "0.5rem" }}
+      >
         Check Safety
       </button>
+      
       {error && <p style={{ color: "red", marginTop: "1rem" }}>{error}</p>}
+      
       {result && (
         <div
           style={{
@@ -57,15 +72,17 @@ const DogSafety = () => {
             padding: "1rem",
             border: "1px solid #ccc",
             borderRadius: "5px",
-            backgroundColor: result.safe ? "#d4edda" : "#f8d7da",
+            backgroundColor: result.safetyRating <= 2 ? "#d4edda" : "#f8d7da",
           }}
         >
           <p>
             <strong>Food:</strong> {result.food}
           </p>
           <p>
-            <strong>Safe for Dogs:</strong>{" "}
-            {result.safe ? "Yes, this food is safe." : "No, this food is not safe."}
+            <strong>Safety Rating:</strong> {result.safetyRating}
+          </p>
+          <p>
+            <strong>Safety Description:</strong> {result.safetyDescription}
           </p>
         </div>
       )}

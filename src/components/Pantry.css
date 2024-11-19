@@ -1,0 +1,49 @@
+.pantry-container {
+    padding: 20px;
+    font-family: Arial, sans-serif;
+  }
+  
+  h1 {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .table-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .header-row, .input-row {
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    gap: 10px;
+    align-items: center;
+  }
+  
+  .header-row {
+    font-weight: bold;
+    background-color: #e0f7fa;
+    padding: 10px;
+  }
+  
+  .input-row {
+    background-color: #f0f0f0;
+    padding: 10px;
+  }
+  
+  input, select, button {
+    padding: 5px;
+  }
+  
+  button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
+    padding: 5px 10px;
+  }
+  
+  button:hover {
+    background-color: #0056b3;
+  }
