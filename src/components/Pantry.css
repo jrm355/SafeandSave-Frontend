@@ -1,91 +1,39 @@
 .pantry-container {
     font-family: Arial, sans-serif;
     padding: 20px;
-    background-color: #f9f9f9;
-    text-align: center;
-  }
-  
-  h1 {
-    margin-bottom: 20px;
-    color: #333;
-  }
-  
-  .pantry-table {
-    display: grid;
-    grid-template-columns: repeat(8, 1fr);
-    gap: 10px;
-    margin-bottom: 20px;
-  }
-  
-  .pantry-header, .pantry-row {
-    display: contents;
-  }
-  
-  .pantry-header div, .pantry-row div {
-    padding: 10px;
-    border: 1px solid #ccc;
-    background-color: #e9f5ff;
-    font-weight: bold;
-    text-align: center;
-  }
-  
-  .pantry-row div {
-    background-color: #fff;
-    font-weight: normal;
-  }
-  
-  button {
-    padding: 5px 10px;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    cursor: pointer;
-    border-radius: 4px;
-  }
-  
-  button:hover {
-    background-color: #0056b3;
   }
   
   .pantry-form {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 15px;
+    margin-bottom: 20px;
   }
   
-  .pantry-form div {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  .form-group {
+    margin-bottom: 10px;
   }
   
-  label {
+  .form-group label {
+    display: block;
     font-weight: bold;
-    margin-bottom: 5px;
   }
   
-  input, select {
+  .form-group input {
+    width: 100%;
     padding: 5px;
+  }
+  
+  .pantry-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+  }
+  
+  .pantry-table th,
+  .pantry-table td {
     border: 1px solid #ccc;
-    border-radius: 4px;
-    width: 150px;
+    padding: 10px;
+    text-align: left;
   }
   
-  input[type="date"] {
-    width: 180px;
-  }
-  
-  button[type="submit"] {
-    padding: 10px 20px;
-    background-color: #28a745;
-    color: white;
-    border: none;
-    cursor: pointer;
-    border-radius: 4px;
-    margin-top: 10px;
-  }
-  
-  button[type="submit"]:hover {
-    background-color: #218838;
+  .pantry-table th {
+    background-color: #f4f4f4;
   }

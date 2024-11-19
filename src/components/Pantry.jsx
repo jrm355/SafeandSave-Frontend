@@ -1,129 +1,148 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios"; // Axios for HTTP requests
-import "./Pantry.css"; // Import the styles
+import axios from "axios";
+import "./Pantry.css";
 
 const Pantry = () => {
-  const [pantryItems, setPantryItems] = useState([]); // Stores pantry items
-  const [newItem, setNewItem] = useState({
-    name: "",
-    location: "fridge",
-    type: "",
+  const [pantryItems, setPantryItems] = useState([]);
+  const [formData, setFormData] = useState({
+    foodItem: "",
+    location: "",
+    foodType: "",
     sellBy: "",
     expiration: "",
     tossBy: "",
   });
 
-  const API_URL = "http://localhost:3001/api/pantry"; // Your backend endpoint
-
-  // Fetch pantry items on page load
+  // Fetch pantry items
   useEffect(() => {
+    const fetchPantryItems = async () => {
+      try {
+        const response = await axios.get("http://localhost:3001/api/pantry");
+        setPantryItems(response.data);
+      } catch (error) {
+        console.error("Error fetching pantry items:", error);
+      }
+    };
     fetchPantryItems();
   }, []);
 
-  // Fetch all pantry items
-  const fetchPantryItems = async () => {
-    try {
-      const response = await axios.get(API_URL);
-      setPantryItems(response.data);
-    } catch (error) {
-      console.error("Error fetching pantry items:", error);
-    }
+  // Handle form input changes
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
   };
 
   // Add a new pantry item
-  const addPantryItem = async (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post(API_URL, newItem);
-      fetchPantryItems(); // Refresh the list after adding
-      setNewItem({ name: "", location: "fridge", type: "", sellBy: "", expiration: "", tossBy: "" }); // Reset input fields
+      const response = await axios.post("http://localhost:3001/api/pantry", formData);
+      setPantryItems([...pantryItems, response.data]); // Update state with new item
+      setFormData({
+        foodItem: "",
+        location: "",
+        foodType: "",
+        sellBy: "",
+        expiration: "",
+        tossBy: "",
+      }); // Reset form
     } catch (error) {
       console.error("Error adding pantry item:", error);
     }
   };
 
-  // Delete a pantry item
-  const deletePantryItem = async (id) => {
-    try {
-      await axios.delete(`${API_URL}/${id}`);
-      fetchPantryItems(); // Refresh the list after deletion
-    } catch (error) {
-      console.error("Error deleting pantry item:", error);
-    }
-  };
-
-  // Update a pantry item (Optional for later if you want edit functionality)
-  const updatePantryItem = async (id, updatedItem) => {
-    try {
-      await axios.put(`${API_URL}/${id}`, updatedItem);
-      fetchPantryItems(); // Refresh the list after updating
-    } catch (error) {
-      console.error("Error updating pantry item:", error);
-    }
-  };
-
   return (
     <div className="pantry-container">
-      <h1>What's in My Fridge?</h1>
-      
-      {/* Form to Add New Pantry Item */}
-      <form onSubmit={addPantryItem} className="pantry-form">
-        <input
-          type="text"
-          placeholder="Food Name"
-          value={newItem.name}
-          onChange={(e) => setNewItem({ ...newItem, name: e.target.value })}
-          required
-        />
-        <select
-          value={newItem.location}
-          onChange={(e) => setNewItem({ ...newItem, location: e.target.value })}
-        >
-          <option value="fridge">Fridge</option>
-          <option value="pantry">Pantry</option>
-          <option value="countertop">Countertop</option>
-        </select>
-        <input
-          type="text"
-          placeholder="Food Type"
-          value={newItem.type}
-          onChange={(e) => setNewItem({ ...newItem, type: e.target.value })}
-        />
-        <input
-          type="date"
-          placeholder="Sell By"
-          value={newItem.sellBy}
-          onChange={(e) => setNewItem({ ...newItem, sellBy: e.target.value })}
-        />
-        <input
-          type="date"
-          placeholder="Expiration"
-          value={newItem.expiration}
-          onChange={(e) => setNewItem({ ...newItem, expiration: e.target.value })}
-        />
-        <input
-          type="date"
-          placeholder="Toss By"
-          value={newItem.tossBy}
-          onChange={(e) => setNewItem({ ...newItem, tossBy: e.target.value })}
-        />
+      <h1>Pantry Tracker</h1>
+
+      <form onSubmit={handleSubmit} className="pantry-form">
+        <div className="form-group">
+          <label htmlFor="foodItem">Food Item:</label>
+          <input
+            id="foodItem"
+            type="text"
+            name="foodItem"
+            value={formData.foodItem}
+            onChange={handleInputChange}
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="location">Location:</label>
+          <input
+            id="location"
+            type="text"
+            name="location"
+            value={formData.location}
+            onChange={handleInputChange}
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="foodType">Food Type:</label>
+          <input
+            id="foodType"
+            type="text"
+            name="foodType"
+            value={formData.foodType}
+            onChange={handleInputChange}
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="sellBy">Sell By Date:</label>
+          <input
+            id="sellBy"
+            type="date"
+            name="sellBy"
+            value={formData.sellBy}
+            onChange={handleInputChange}
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="expiration">Expiration Date:</label>
+          <input
+            id="expiration"
+            type="date"
+            name="expiration"
+            value={formData.expiration}
+            onChange={handleInputChange}
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="tossBy">Toss By Date:</label>
+          <input
+            id="tossBy"
+            type="date"
+            name="tossBy"
+            value={formData.tossBy}
+            onChange={handleInputChange}
+          />
+        </div>
         <button type="submit">Add Item</button>
       </form>
 
-      {/* Display Pantry Items */}
-      <div className="pantry-items">
-        {pantryItems.map((item) => (
-          <div key={item._id} className="pantry-item">
-            <h3>{item.name}</h3>
-            <p><strong>Location:</strong> {item.location}</p>
-            <p><strong>Type:</strong> {item.type}</p>
-            <p><strong>Sell By:</strong> {item.sellBy}</p>
-            <p><strong>Expiration:</strong> {item.expiration}</p>
-            <p><strong>Toss By:</strong> {item.tossBy}</p>
-            <button onClick={() => deletePantryItem(item._id)}>Delete</button>
-          </div>
-        ))}
-      </div>
+      <table className="pantry-table">
+        <thead>
+          <tr>
+            <th>Food Item</th>
+            <th>Location</th>
+            <th>Food Type</th>
+            <th>Sell By</th>
+            <th>Expiration</th>
+            <th>Toss By</th>
+          </tr>
+        </thead>
+        <tbody>
+          {pantryItems.map((item) => (
+            <tr key={item._id}>
+              <td>{item.foodItem}</td>
+              <td>{item.location}</td>
+              <td>{item.foodType}</td>
+              <td>{item.sellBy}</td>
+              <td>{item.expiration}</td>
+              <td>{item.tossBy}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
     </div>
   );
 };
