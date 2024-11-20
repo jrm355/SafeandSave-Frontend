@@ -1,0 +1,42 @@
+/* DogSafety.css */
+
+/* Container for the entire DogSafety component */
+.dog-safety-container {
+    padding: 2rem;
+  }
+  
+  /* Style for input field */
+  .input-field {
+    padding: 0.5rem;
+    width: 300px;
+  }
+  
+  /* Style for the Check Safety button */
+  .check-button {
+    margin-left: 1rem;
+    padding: 0.5rem;
+  }
+  
+  /* Error message styling */
+  .error-message {
+    color: red;
+    margin-top: 1rem;
+  }
+  
+  /* Styles for the result box */
+  .result-box {
+    margin-top: 1rem;
+    padding: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  /* Conditional styling for safe vs unsafe results */
+  .result-box.safe {
+    background-color: #d4edda;
+  }
+  
+  .result-box.unsafe {
+    background-color: #580b51;
+  }
+  

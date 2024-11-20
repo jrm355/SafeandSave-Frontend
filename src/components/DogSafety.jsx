@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import './DogSafety.css'; // Import the external CSS file
 
 const DogSafety = () => {
   const [food, setFood] = useState(""); // For food input
@@ -62,7 +63,7 @@ const DogSafety = () => {
   };
 
   return (
-    <div style={{ padding: "2rem" }}>
+    <div className="dog-safety-container">
       <h1>Dog Safety Checker</h1>
       
       {/* Input field with datalist for autofill */}
@@ -71,7 +72,7 @@ const DogSafety = () => {
         placeholder="Enter food item"
         value={food}
         onChange={handleInputChange}
-        style={{ padding: "0.5rem", width: "300px" }}
+        className="input-field"
         list="food-suggestions" // Link to datalist
       />
       
@@ -84,22 +85,16 @@ const DogSafety = () => {
       
       <button
         onClick={handleCheckClick}
-        style={{ marginLeft: "1rem", padding: "0.5rem" }}
+        className="check-button"
       >
         Check Safety
       </button>
       
-      {error && <p style={{ color: "red", marginTop: "1rem" }}>{error}</p>}
+      {error && <p className="error-message">{error}</p>}
       
       {result && (
         <div
-          style={{
-            marginTop: "1rem",
-            padding: "1rem",
-            border: "1px solid #ccc",
-            borderRadius: "5px",
-            backgroundColor: result.safetyRating <= 2 ? "#d4edda" : "#f8d7da",
-          }}
+          className={`result-box ${result.safetyRating <= 2 ? 'safe' : 'unsafe'}`}
         >
           <p>
             <strong>Food:</strong> {result.food}
