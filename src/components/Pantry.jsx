@@ -6,14 +6,14 @@ const Pantry = () => {
   const [pantryItems, setPantryItems] = useState([]);
   const [formData, setFormData] = useState({
     foodItem: "",
-    location: "",
-    foodType: "",
+    location: "Fridge", // Default dropdown option
+    foodType: "Fruits", // Default dropdown option
     sellBy: "",
     expiration: "",
     tossBy: "",
   });
+  const [editingId, setEditingId] = useState(null);
 
-  // Fetch pantry items
   useEffect(() => {
     const fetchPantryItems = async () => {
       try {
@@ -26,30 +26,65 @@ const Pantry = () => {
     fetchPantryItems();
   }, []);
 
-  // Handle form input changes
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
 
-  // Add a new pantry item
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post("http://localhost:3001/api/pantry", formData);
-      setPantryItems([...pantryItems, response.data]); // Update state with new item
-      setFormData({
-        foodItem: "",
-        location: "",
-        foodType: "",
-        sellBy: "",
-        expiration: "",
-        tossBy: "",
-      }); // Reset form
+      if (editingId) {
+        const response = await axios.put(`http://localhost:3001/api/pantry/${editingId}`, formData);
+        setPantryItems(
+          pantryItems.map((item) =>
+            item._id === editingId ? { ...item, ...response.data } : item
+          )
+        );
+      } else {
+        const response = await axios.post("http://localhost:3001/api/pantry", formData);
+        setPantryItems([...pantryItems, response.data]);
+      }
+      resetForm();
     } catch (error) {
-      console.error("Error adding pantry item:", error);
+      console.error("Error adding or updating pantry item:", error);
     }
   };
+
+  const handleDelete = async (id) => {
+    try {
+      await axios.delete(`http://localhost:3001/api/pantry/${id}`);
+      setPantryItems(pantryItems.filter((item) => item._id !== id));
+    } catch (error) {
+      console.error("Error deleting pantry item:", error);
+    }
+  };
+
+  const handleEdit = (item) => {
+    setFormData({
+      foodItem: item.foodItem,
+      location: item.location,
+      foodType: item.foodType,
+      sellBy: item.sellBy.split("T")[0],
+      expiration: item.expiration.split("T")[0],
+      tossBy: item.tossBy.split("T")[0],
+    });
+    setEditingId(item._id);
+  };
+
+  const resetForm = () => {
+    setFormData({
+      foodItem: "",
+      location: "Fridge",
+      foodType: "Fruits",
+      sellBy: "",
+      expiration: "",
+      tossBy: "",
+    });
+    setEditingId(null);
+  };
+
+  const formatDate = (date) => new Date(date).toLocaleDateString("en-US");
 
   return (
     <div className="pantry-container">
@@ -68,23 +103,36 @@ const Pantry = () => {
         </div>
         <div className="form-group">
           <label htmlFor="location">Location:</label>
-          <input
+          <select
             id="location"
-            type="text"
             name="location"
             value={formData.location}
             onChange={handleInputChange}
-          />
+          >
+            <option value="Fridge">Fridge</option>
+            <option value="Countertop">Countertop</option>
+            <option value="Pantry">Pantry</option>
+            <option value="Other">Other</option>
+          </select>
         </div>
         <div className="form-group">
           <label htmlFor="foodType">Food Type:</label>
-          <input
+          <select
             id="foodType"
-            type="text"
             name="foodType"
             value={formData.foodType}
             onChange={handleInputChange}
-          />
+          >
+            <option value="Fruits">Fruits</option>
+            <option value="Vegetables">Vegetables</option>
+            <option value="Grains">Grains</option>
+            <option value="Proteins">Proteins</option>
+            <option value="Meat">Meat</option>
+            <option value="Dairy">Dairy</option>
+            <option value="Oil and Sugar">Oil and Sugar</option>
+            <option value="Spices">Spices</option>
+            <option value="Other">Other</option>
+          </select>
         </div>
         <div className="form-group">
           <label htmlFor="sellBy">Sell By Date:</label>
@@ -116,7 +164,8 @@ const Pantry = () => {
             onChange={handleInputChange}
           />
         </div>
-        <button type="submit">Add Item</button>
+        <button type="submit">{editingId ? "Update Item" : "Add Item"}</button>
+        {editingId && <button onClick={resetForm}>Cancel Edit</button>}
       </form>
 
       <table className="pantry-table">
@@ -128,6 +177,7 @@ const Pantry = () => {
             <th>Sell By</th>
             <th>Expiration</th>
             <th>Toss By</th>
+            <th>Actions</th>
           </tr>
         </thead>
         <tbody>
@@ -136,9 +186,13 @@ const Pantry = () => {
               <td>{item.foodItem}</td>
               <td>{item.location}</td>
               <td>{item.foodType}</td>
-              <td>{item.sellBy}</td>
-              <td>{item.expiration}</td>
-              <td>{item.tossBy}</td>
+              <td>{formatDate(item.sellBy)}</td>
+              <td>{formatDate(item.expiration)}</td>
+              <td>{formatDate(item.tossBy)}</td>
+              <td>
+                <button onClick={() => handleEdit(item)}>Edit</button>
+                <button onClick={() => handleDelete(item._id)}>Delete</button>
+              </td>
             </tr>
           ))}
         </tbody>
