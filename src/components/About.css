@@ -1,6 +1,6 @@
 .about-container {
     padding: 20px;
-    background-color: #f0f8ff; /* Light blue background */
+    background-color: #ba0f95; /* Light blue background */
     color: #333;
     font-family: Arial, sans-serif;
   }
@@ -8,7 +8,7 @@
   /* Header Styling */
   .about-header {
     text-align: center;
-    background-color: #87ceeb;
+    background-color: #6b135f;
     padding: 20px;
     color: #fff;
     font-size: 24px;
@@ -25,7 +25,7 @@
   
   .about-section {
     width: 45%;
-    background-color: #b0e0e6;
+    background-color: #e2b0e6;
     padding: 15px;
     border-radius: 8px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);

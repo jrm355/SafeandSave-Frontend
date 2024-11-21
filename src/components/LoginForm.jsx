@@ -54,7 +54,7 @@ const LoginForm = () => {
         {/* <button type="submit">Login</button>
       </form> */}
 
-      {/* Display the dog image inside a framed container */}
+      {/* Display the dog image*/}
       {dogImage && (
         <div className="dog-image-container">
           <img src={dogImage} alt="Random Dog" className="dog-image" />

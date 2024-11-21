@@ -25,7 +25,7 @@ body {
   position: sticky;
   top: 0;
   z-index: 1000;
-  background-color: #87ceeb;
+  background-color: #ca84e8;
   padding: 10px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   transition: background-color 0.3s ease-in-out;
@@ -58,5 +58,5 @@ body {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.06);
 }
 .sticky-nav:hover {
-  background-color: #4682b4;
+  background-color: #c560d9;
 }

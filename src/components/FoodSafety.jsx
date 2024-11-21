@@ -4,7 +4,8 @@ import './FoodSafety.css'; // You can style the table in the CSS file if needed
 const FoodSafety = () => {
   return (
     <div className="food-safety-container">
-      <h1>Food Safety: How Long Can Foods Last After Sell-by Date?</h1>
+      <h1>Food Safety</h1>
+      <h2>How Long Can Foods Last After Sell-by Date?</h2>
       
       {/* Chart of major foods and their safety after sell-by date */}
       <table className="food-safety-table">
