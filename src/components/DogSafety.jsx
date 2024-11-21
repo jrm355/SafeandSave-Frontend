@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
-import './DogSafety.css'; 
+import './DogSafety.css';
 
 const DogSafety = () => {
   const [food, setFood] = useState(""); // For food input
   const [result, setResult] = useState(null); // To store result from backend
   const [error, setError] = useState(null); // For error messages
   const [suggestions, setSuggestions] = useState([]); // For storing autocomplete suggestions
+  const [isFetching, setIsFetching] = useState(false); // For loading state
 
   useEffect(() => {
     // Fetch all foods once when the component mounts for autofill suggestions
@@ -22,21 +23,22 @@ const DogSafety = () => {
     fetchFoodSuggestions();
   }, []);
 
+  // Search for food safety based on the selected food
   const checkFoodSafety = async () => {
     try {
       const response = await fetch(`http://localhost:3001/api/dogfoods/search?food=${food.trim()}`);
-      
+
       if (!response.ok) {
         throw new Error("Failed to fetch data");
       }
-  
+
       const contentType = response.headers.get("Content-Type");
       if (!contentType || !contentType.includes("application/json")) {
         throw new Error("Expected JSON, but received something else.");
       }
-  
+
       const data = await response.json();
-  
+
       if (data.length === 0) {
         setError("Food not found in the database.");
         setResult(null);
@@ -56,8 +58,21 @@ const DogSafety = () => {
     }
   };
 
+  // Debounced handler to filter suggestions based on the input
   const handleInputChange = (e) => {
-    setFood(e.target.value);
+    const value = e.target.value;
+    setFood(value);
+
+    if (value) {
+      setIsFetching(true);
+      const filteredSuggestions = suggestions.filter((suggestion) =>
+        suggestion.toLowerCase().includes(value.toLowerCase())
+      );
+      setSuggestions(filteredSuggestions);  // Update suggestions based on input
+      setIsFetching(false);
+    } else {
+      setSuggestions([]);  // Clear suggestions if input is empty
+    }
   };
 
   const handleCheckClick = () => {
@@ -68,28 +83,11 @@ const DogSafety = () => {
     }
   };
 
-  // Map safety rating to a class name for styling
-  const getSafetyClass = (rating) => {
-    switch (rating) {
-      case 1:
-        return "safety-level-1";
-      case 2:
-        return "safety-level-2";
-      case 3:
-        return "safety-level-3";
-      case 4:
-        return "safety-level-4";
-      case 5:
-        return "safety-level-5";
-      default:
-        return "";
-    }
-  };
-
   return (
     <div className="dog-safety-container">
       <h1>Dog Safety Checker</h1>
 
+      {/* Input field with datalist for autofill */}
       <input
         type="text"
         placeholder="Enter food item"
@@ -98,11 +96,16 @@ const DogSafety = () => {
         className="input-field"
         list="food-suggestions" // Link to datalist
       />
-      
+
+      {/* Datalist containing food suggestions */}
       <datalist id="food-suggestions">
-        {suggestions.map((foodName, index) => (
-          <option key={index} value={foodName} />
-        ))}
+        {suggestions.length === 0 ? (
+          !isFetching && <option value="No matches found" disabled />
+        ) : (
+          suggestions.map((foodName, index) => (
+            <option key={index} value={foodName} />
+          ))
+        )}
       </datalist>
 
       <button onClick={handleCheckClick} className="check-button">
@@ -112,7 +115,7 @@ const DogSafety = () => {
       {error && <p className="error-message">{error}</p>}
 
       {result && (
-        <div className={`result-box ${getSafetyClass(result.safetyRating)}`}>
+        <div className={`result-box safety-level-${result.safetyRating}`}>
           <p><strong>Food:</strong> {result.food}</p>
           <p><strong>Safety Rating:</strong> {result.safetyRating}</p>
           <p><strong>Safety Description:</strong> {result.safetyDescription}</p>
