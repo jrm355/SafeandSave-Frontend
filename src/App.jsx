@@ -7,7 +7,7 @@ const App = () => {
     <div>
       <header className="header">
         <h1>Safe and Save</h1>
-        <p>Eliminate Food Waste Tool</p>
+        <p>Pantry and Dog Safety Tool</p>
       </header>
       <main className="main-content">
         <LoginForm />

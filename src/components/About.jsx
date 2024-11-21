@@ -16,9 +16,7 @@ const About = () => {
           <h2>How to Use</h2>
           <ul>
             <li>
-              <strong>On the Pantry Page:</strong> Simply input any foods you’ve
-              purchased, as well as the expiration dates, and you will be given
-              a recommendation on when to toss the food.
+              <strong>On the Pantry Page:</strong> Simply input any foods whose expiration and sell by dates you'd like to keep track of
             </li>
             <li>
               <strong>On the Dog Safety Page:</strong> Simply input a food and

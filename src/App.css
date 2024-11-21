@@ -1,8 +1,7 @@
-/* app.css */
 .main-content {
   display: flex;
   justify-content: center;
-  align-items: flex-start; /* Align content to the top */
+  align-items: flex-start; 
   flex-grow: 1;
   padding: 20px;
   min-height: calc(100vh - 70px); /* Account for navbar height */
@@ -15,7 +14,7 @@
   box-shadow: 0 4px 8px rgba(45, 11, 45, 0.1);
   max-width: 400px;
   width: 100%;
-  margin: 0 auto; /* Center it horizontally */
+  margin: 0 auto; 
 }
 h1 {
   justify-content: center;}
@@ -40,7 +39,7 @@ h1 {
     width: 80%;
     max-width: 400px;
   }
-  
+  /* All buttons */
   button {
     padding: 10px 20px;
     background-color: #4CAF50;
@@ -57,19 +56,31 @@ h1 {
     font-size: 1.2em;
   }
   
-  .dog-image-container {
-    margin-top: 20px;
-    padding: 10px;
-    border: 5px solid #ccc;
-    display: inline-block;
-    border-radius: 10px;
-    background-color: #f0f0f0;
-  }
-  
-  .dog-image {
-    max-width: 300px;  /* Limit the size of the image */
-    border-radius: 8px; /* Optional: Round the corners of the image */
-  }
+  /* Dog Image */
+ /* Centering the container */
+.dog-image-container {
+  margin-top: 20px;
+  padding: 10px;
+  border: 5px solid #ccc;
+  border-radius: 10px;
+  background-color: #f0f0f0;
+  display: flex; 
+  justify-content: center; 
+  align-items: center; 
+  text-align: center; 
+  width: 100%; 
+  max-width: 350px; 
+  margin-left: auto; 
+  margin-right: auto; 
+}
+
+/* Styling the image */
+.dog-image {
+  max-width: 300px; 
+  border-radius: 8px; 
+  width: 100%; 
+}
+
   
   * {
     margin: 0;
@@ -78,5 +89,17 @@ h1 {
 
     header {
       text-align: center;
-      margin-bottom: 20px;  /* Space below the header */
+      margin-bottom: 20px;  
     }
+
+
+h1 {
+  font-family: 'Roboto', sans-serif;  
+  font-size: 3rem;                    
+  font-weight: bold;
+  color: #4CAF50;                     
+  letter-spacing: 2px;                
+  text-transform: uppercase;         
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);  
+}
+

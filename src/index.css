@@ -49,7 +49,7 @@ body {
   text-decoration: underline;
 }
 
-/* Add some global padding for body */
+/* Global padding for body */
 .container {
   width: 100%;
   max-width: 1200px;
@@ -58,5 +58,5 @@ body {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.06);
 }
 .sticky-nav:hover {
-  background-color: #4682b4; /* Slightly darker blue */
+  background-color: #4682b4;
 }

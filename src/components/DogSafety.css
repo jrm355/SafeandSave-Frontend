@@ -2,41 +2,65 @@
 
 /* Container for the entire DogSafety component */
 .dog-safety-container {
-    padding: 2rem;
-  }
-  
-  /* Style for input field */
-  .input-field {
-    padding: 0.5rem;
-    width: 300px;
-  }
-  
-  /* Style for the Check Safety button */
-  .check-button {
-    margin-left: 1rem;
-    padding: 0.5rem;
-  }
-  
-  /* Error message styling */
-  .error-message {
-    color: red;
-    margin-top: 1rem;
-  }
-  
-  /* Styles for the result box */
-  .result-box {
-    margin-top: 1rem;
-    padding: 1rem;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-  }
-  
-  /* Conditional styling for safe vs unsafe results */
-  .result-box.safe {
-    background-color: #d4edda;
-  }
-  
-  .result-box.unsafe {
-    background-color: #580b51;
-  }
-  
+  padding: 2rem;
+}
+
+/* Style for input field */
+.input-field {
+  padding: 0.5rem;
+  width: 300px;
+}
+
+/* Style for the Check Safety button*/
+.check-button {
+  margin-left: 1rem;
+  padding: 0.5rem;
+}
+
+.error-message {
+  color: red;
+  margin-top: 1rem;
+}
+
+/* Styles for the result box */
+.result-box {
+  margin-top: 1rem;
+  padding: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+/* Safety Levels */
+.safety-level-1 {
+  background-color: #d4edda; /* Safe (green) */
+  border-color: #c3e6cb;
+}
+
+.safety-level-2 {
+  background-color: #fff3cd; /* Caution (yellow) */
+  border-color: #ffeeba;
+}
+
+.safety-level-3 {
+  background-color: #f8d7da; /* Neutral (light red) */
+  border-color: #f5c6cb;
+}
+
+.safety-level-4 {
+  background-color: #f5c6cb; /* Unsafe (red) */
+  border-color: #f1b0b7;
+}
+
+.safety-level-5 {
+  background-color: #f44336; /* Very Unsafe (dark red) */
+  border-color: #b3242e;
+}
+
+/* Conditional styling for safe vs unsafe results */
+.result-box.safe {
+  background-color: #d4edda;
+}
+
+.result-box.unsafe {
+  background-color: #580b51;
+}
