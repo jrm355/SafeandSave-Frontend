@@ -19,3 +19,64 @@
 }
 h1 {
   justify-content: center;}
+
+  .App {
+    text-align: center;
+    font-family: Arial, sans-serif;
+  }
+  
+  form {
+    margin: 20px;
+  }
+  
+  label {
+    display: block;
+    margin-bottom: 10px;
+  }
+  
+  input {
+    margin-top: 5px;
+    padding: 5px;
+    width: 80%;
+    max-width: 400px;
+  }
+  
+  button {
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+  }
+  
+  button:hover {
+    background-color: #45a049;
+  }
+  
+  p {
+    font-size: 1.2em;
+  }
+  
+  .dog-image-container {
+    margin-top: 20px;
+    padding: 10px;
+    border: 5px solid #ccc;
+    display: inline-block;
+    border-radius: 10px;
+    background-color: #f0f0f0;
+  }
+  
+  .dog-image {
+    max-width: 300px;  /* Limit the size of the image */
+    border-radius: 8px; /* Optional: Round the corners of the image */
+  }
+  
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;}
+
+    header {
+      text-align: center;
+      margin-bottom: 20px;  /* Space below the header */
+    }
