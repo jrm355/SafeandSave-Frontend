@@ -24,7 +24,7 @@ const About = () => {
               to eat.
             </li>
             <li>
-              <strong>On the Food Safety Page:</strong> Check the chart for foods that are commonly good past their expiration date
+              <strong>On the Food Safety Page:</strong> Check the chart for foods that are commonly good past their expiration date. 
             </li>
           </ul>
         </section>
