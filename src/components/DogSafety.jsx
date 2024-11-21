@@ -87,6 +87,19 @@ const DogSafety = () => {
     <div className="dog-safety-container">
       <h1>Dog Safety Checker</h1>
 
+      {/* Warning Disclaimer */}
+      <div className="warning-disclaimer">
+        <h3 className="warning-header">Warning:</h3>
+        <p className="warning-message">
+          Before feeding your dog something new, check with a veterinarian. 
+          When introducing new foods, always start with a small amount and 
+          monitor for allergic reactions. Most packaged foods have multiple 
+          ingredients, so be careful to check every ingredient before introducing 
+          them to your animal. Never give your dog anything that can shard, 
+          like cooked bones.
+        </p>
+      </div>
+
       {/* Input field with datalist for autofill */}
       <input
         type="text"

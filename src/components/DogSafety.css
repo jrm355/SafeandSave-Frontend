@@ -32,35 +32,79 @@
 
 /* Safety Levels */
 .safety-level-1 {
-  background-color: #d4edda; /* Safe (green) */
+  background-color: #f4faf5; /* Safe (green) */
   border-color: #c3e6cb;
 }
 
 .safety-level-2 {
-  background-color: #fff3cd; /* Caution (yellow) */
-  border-color: #ffeeba;
+  background-color: #dfff0f; /* Caution (yellow) */
+  border-color: #a3a72f;
 }
 
 .safety-level-3 {
-  background-color: #f8d7da; /* Neutral (light red) */
-  border-color: #f5c6cb;
+  background-color: rgb(159, 82, 14);
+  border-color: orangered
 }
 
 .safety-level-4 {
-  background-color: #f5c6cb; /* Unsafe (red) */
+  background-color: #8a130f; /* Unsafe (red) */
   border-color: #f1b0b7;
 }
 
 .safety-level-5 {
-  background-color: #f44336; /* Very Unsafe (dark red) */
-  border-color: #b3242e;
+  background-color: #1c0505; /* Very Unsafe (dark red) */
+  border-color: #74151b;
 }
 
-/* Conditional styling for safe vs unsafe results */
+.dog-safety-container {
+  padding: 2rem;
+}
+
+/* Warning Disclaimer Styles */
+.warning-disclaimer {
+  background-color: #f8d7da;  /* Light red for warning */
+  border: 1px solid #f5c6cb;  /* Darker red for border */
+  color: #721c24;             /* Dark red text */
+  padding: 1rem;
+  border-radius: 5px;
+  margin-top: 2rem;
+}
+
+.warning-header {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.warning-message {
+  font-size: 1rem;
+  margin-top: 0.5rem;
+}
+
+
+/* Error Message */
+.error-message {
+  color: red;
+  margin-top: 1rem;
+}
+
+/* Result box */
+.result-box {
+  margin-top: 1rem;
+  padding: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
 .result-box.safe {
   background-color: #d4edda;
 }
 
 .result-box.unsafe {
   background-color: #580b51;
+}
+
+/* Styling for no matches found */
+datalist option[disabled] {
+  font-style: italic;
+  color: grey;
 }
