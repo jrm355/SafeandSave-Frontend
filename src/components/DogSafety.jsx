@@ -1,44 +1,54 @@
 import React, { useState, useEffect } from "react";
-import './DogSafety.css';
+import "./DogSafety.css";
 
 const DogSafety = () => {
-  const [food, setFood] = useState(""); // For food input
-  const [result, setResult] = useState(null); // To store result from backend
-  const [error, setError] = useState(null); // For error messages
-  const [suggestions, setSuggestions] = useState([]); // For storing autocomplete suggestions
-  const [isFetching, setIsFetching] = useState(false); // For loading state
+  const [food, setFood] = useState(""); // Input value
+  const [result, setResult] = useState(null); // Backend result
+  const [error, setError] = useState(null); // Error message
+  const [suggestions, setSuggestions] = useState([]); // All food suggestions
+  const [filteredSuggestions, setFilteredSuggestions] = useState([]); // Filtered suggestions for input
 
+  // Fetch food suggestions once on mount
   useEffect(() => {
-    // Fetch all foods once when the component mounts for autofill suggestions
     const fetchFoodSuggestions = async () => {
       try {
         const response = await fetch("http://localhost:3001/api/dogfoods");
         const data = await response.json();
-        setSuggestions(data.map(food => food.name)); // Extract food names for the suggestions
+        setSuggestions(data.map((item) => item.name)); // Store all food names
       } catch (err) {
         console.error("Error fetching food suggestions:", err);
+        setError("Unable to fetch food suggestions. Please try again later.");
       }
     };
 
     fetchFoodSuggestions();
   }, []);
 
-  // Search for food safety based on the selected food
+  // Update filtered suggestions on input change
+  const handleInputChange = (e) => {
+    const value = e.target.value;
+    setFood(value);
+
+    if (value) {
+      const filtered = suggestions.filter((suggestion) =>
+        suggestion.toLowerCase().includes(value.toLowerCase())
+      );
+      setFilteredSuggestions(filtered);
+    } else {
+      setFilteredSuggestions([]);
+    }
+  };
+
+  // Check food safety
   const checkFoodSafety = async () => {
     try {
-      const response = await fetch(`http://localhost:3001/api/dogfoods/search?food=${food.trim()}`);
+      const response = await fetch(
+        `http://localhost:3001/api/dogfoods/search?food=${food.trim()}`
+      );
 
-      if (!response.ok) {
-        throw new Error("Failed to fetch data");
-      }
-
-      const contentType = response.headers.get("Content-Type");
-      if (!contentType || !contentType.includes("application/json")) {
-        throw new Error("Expected JSON, but received something else.");
-      }
+      if (!response.ok) throw new Error("Failed to fetch data");
 
       const data = await response.json();
-
       if (data.length === 0) {
         setError("Food not found in the database.");
         setResult(null);
@@ -58,23 +68,7 @@ const DogSafety = () => {
     }
   };
 
-  // Debounced handler to filter suggestions based on the input
-  const handleInputChange = (e) => {
-    const value = e.target.value;
-    setFood(value);
-
-    if (value) {
-      setIsFetching(true);
-      const filteredSuggestions = suggestions.filter((suggestion) =>
-        suggestion.toLowerCase().includes(value.toLowerCase())
-      );
-      setSuggestions(filteredSuggestions);  // Update suggestions based on input
-      setIsFetching(false);
-    } else {
-      setSuggestions([]);  // Clear suggestions if input is empty
-    }
-  };
-
+  // Handle button click
   const handleCheckClick = () => {
     if (food.trim()) {
       checkFoodSafety();
@@ -87,37 +81,32 @@ const DogSafety = () => {
     <div className="dog-safety-container">
       <h1>Dog Safety Checker</h1>
 
-      {/* Warning Disclaimer */}
+      {/* Warning Section */}
       <div className="warning-disclaimer">
         <h3 className="warning-header">Warning:</h3>
         <p className="warning-message">
-          Before feeding your dog something new, check with a veterinarian. 
-          When introducing new foods, always start with a small amount and 
-          monitor for allergic reactions. Most packaged foods have multiple 
-          ingredients, so be careful to check every ingredient before introducing 
-          them to your animal. Never give your dog anything that can shard, 
-          like cooked bones.
+          Before feeding your dog something new, check with a veterinarian. Start with small portions and monitor for reactions.
         </p>
       </div>
 
-      {/* Input field with datalist for autofill */}
+      {/* Input Field */}
       <input
         type="text"
         placeholder="Enter food item"
         value={food}
         onChange={handleInputChange}
         className="input-field"
-        list="food-suggestions" // Link to datalist
+        list="food-suggestions" // Attach datalist
       />
 
-      {/* Datalist containing food suggestions */}
+      {/* Datalist */}
       <datalist id="food-suggestions">
-        {suggestions.length === 0 ? (
-          !isFetching && <option value="No matches found" disabled />
-        ) : (
-          suggestions.map((foodName, index) => (
-            <option key={index} value={foodName} />
+        {filteredSuggestions.length > 0 ? (
+          filteredSuggestions.map((item, index) => (
+            <option key={index} value={item} />
           ))
+        ) : (
+          <option value="No suggestions available" disabled />
         )}
       </datalist>
 
@@ -125,13 +114,21 @@ const DogSafety = () => {
         Check Safety
       </button>
 
+      {/* Error Message */}
       {error && <p className="error-message">{error}</p>}
 
+      {/* Result Display */}
       {result && (
         <div className={`result-box safety-level-${result.safetyRating}`}>
-          <p><strong>Food:</strong> {result.food}</p>
-          <p><strong>Safety Rating:</strong> {result.safetyRating}</p>
-          <p><strong>Safety Description:</strong> {result.safetyDescription}</p>
+          <p>
+            <strong>Food:</strong> {result.food}
+          </p>
+          <p>
+            <strong>Safety Rating:</strong> {result.safetyRating}
+          </p>
+          <p>
+            <strong>Description:</strong> {result.safetyDescription}
+          </p>
         </div>
       )}
     </div>

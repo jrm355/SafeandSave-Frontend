@@ -1,33 +1,50 @@
+/* General container padding */
 .food-safety-container {
-    padding: 2rem;
-  }
-  
-  .food-safety-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 2rem;
-  }
-  
-  .food-safety-table th,
-  .food-safety-table td {
-    border: 1px solid #6b176b;
-    padding: 8px 12px;
-    text-align: left;
-  }
-  
-  .food-safety-table th {
-    background-color: #f4f4f4;
-  }
-  
-  .food-safety-table td {
-    background-color: #880c78;
-  }
-  
-  .food-safety-table tr:nth-child(even) td {
-    background-color: #41083b;
-  }
-  
-  .food-safety-table tr:hover td {
-    background-color: #91188d;
-  }
-  
+  padding: 2rem;
+}
+
+/* Table Styling */
+.food-safety-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 2rem;
+}
+
+/* Header and cell styling */
+.food-safety-table th,
+.food-safety-table td {
+  padding: 8px 12px;
+  text-align: left;
+  border: 1px solid #6b176b; /* Dark border for table cells */
+}
+
+/* Header background and sticky positioning */
+.food-safety-table th {
+  background-color: #d3b0b0; /* Light pink for header */
+  position: sticky;
+  top: 0;
+  background-color: #f4f4f4; /* Light gray background for the header */
+  font-weight: bold;
+  z-index: 1;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Slight shadow to separate header from body */
+}
+
+/* Alternating row colors */
+.food-safety-table tr:nth-child(even) td {
+  background-color: #41083b; /* Darker background for even rows */
+}
+
+.food-safety-table tr:hover td {
+  background-color: #91188d; /* Hover effect on rows */
+}
+
+/* Data cells styling */
+.food-safety-table td {
+  background-color: #880c78; /* Default data cell background color */
+}
+
+/* Container to make the table scrollable */
+.table-scroll {
+  max-height: 400px; /* Set a max height for scrollable area */
+  overflow-y: auto; /* Enable vertical scrolling */
+}

@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import './FoodSafety.css'; // You can style the table in the CSS file if needed
+import './FoodSafety.css'; // Ensure this file includes the scrollable container styles
 
 const FoodSafety = () => {
-  // Initial food data
+  // Extended food data
   const foodData = [
     { food: "Canned Goods", safety: "1-2 years", notes: "As long as the can is not damaged, bulging, or rusted." },
     { food: "Dry Goods (Pasta, Rice, etc.)", safety: "6 months to 1 year", notes: "Typically, dry pasta and rice last well beyond the date." },
@@ -23,15 +23,26 @@ const FoodSafety = () => {
     { food: "Butter", safety: "2-3 weeks (in the fridge)", notes: "Butter can last several weeks after the date if stored properly." },
     { food: "Processed Meats (Bacon, Sausages)", safety: "1 week", notes: "Bacon and sausages should be consumed within a week." },
     { food: "Fish (Fresh)", safety: "1-2 days", notes: "Fresh fish should be cooked within a day or two." },
-    { food: "Seafood (Frozen)", safety: "6 months", notes: "Frozen seafood can last 6 months or longer." }
+    { food: "Seafood (Frozen)", safety: "6 months", notes: "Frozen seafood can last 6 months or longer." },
+    { food: "Nut Butter", safety: "1 year", notes: "Unopened jars last about a year; check for oil separation." },
+    { food: "Cereal", safety: "6 months to 1 year", notes: "Dry cereal lasts well beyond the printed date if sealed." },
+    { food: "Pickles", safety: "1 year", notes: "Pickles last a year or more if unopened and refrigerated." },
+    { food: "Soda", safety: "6-9 months", notes: "Soda may lose fizz but is safe to drink for months." },
+    { food: "Chips", safety: "1-2 months", notes: "Sealed chips can last a couple of months." },
+    { food: "Pies (Fruit)", safety: "3-5 days", notes: "Refrigerate fruit pies for longer shelf life." },
+    { food: "Pies (Cream)", safety: "2-3 days", notes: "Cream pies spoil quickly; consume within 3 days." },
+    { food: "Ice Cream", safety: "2-4 months", notes: "Avoid freezer burn for better taste and texture." },
+    { food: "Granola Bars", safety: "6-9 months", notes: "Sealed granola bars last up to a year." },
+    { food: "Spices", safety: "1-2 years", notes: "Flavor may diminish over time but remains safe." },
+    { food: "Honey", safety: "Indefinite", notes: "Honey never spoils if sealed properly." },
+    { food: "Chocolate", safety: "6 months to 1 year", notes: "May develop a white bloom but is still safe to eat." },
+    { food: "Coffee (Ground)", safety: "3-6 months", notes: "Ground coffee loses freshness but remains safe to brew." }
   ];
 
-  // State for sorting and search
   const [sortedData, setSortedData] = useState(foodData);
-  const [sortOrder, setSortOrder] = useState("asc"); // "asc" for ascending, "desc" for descending
+  const [sortOrder, setSortOrder] = useState("asc");
   const [searchQuery, setSearchQuery] = useState("");
 
-  // Handle sorting
   const handleSort = () => {
     const newSortOrder = sortOrder === "asc" ? "desc" : "asc";
     setSortOrder(newSortOrder);
@@ -43,12 +54,10 @@ const FoodSafety = () => {
     setSortedData(sorted);
   };
 
-  // Handle search
   const handleSearch = (e) => {
     setSearchQuery(e.target.value);
   };
 
-  // Filter data based on search query
   const filteredData = sortedData.filter(item =>
     item.food.toLowerCase().includes(searchQuery.toLowerCase())
   );
@@ -58,7 +67,6 @@ const FoodSafety = () => {
       <h1>Food Safety</h1>
       <h2>How Long Can Foods Last After Sell-by Date?</h2>
 
-      {/* Search input */}
       <input
         type="text"
         placeholder="Search for a food..."
@@ -67,30 +75,30 @@ const FoodSafety = () => {
         className="search-input"
       />
 
-      {/* Sorting button */}
       <button onClick={handleSort} className="sort-button">
         Sort Alphabetically ({sortOrder === "asc" ? "A-Z" : "Z-A"})
       </button>
 
-      {/* Chart of major foods and their safety after sell-by date */}
-      <table className="food-safety-table">
-        <thead>
-          <tr>
-            <th>Food Type</th>
-            <th>Can Be Consumed After Sell-by/Use-by Date</th>
-            <th>Notes</th>
-          </tr>
-        </thead>
-        <tbody>
-          {filteredData.map((item, index) => (
-            <tr key={index}>
-              <td>{item.food}</td>
-              <td>{item.safety}</td>
-              <td>{item.notes}</td>
+      <div className="table-scroll">
+        <table className="food-safety-table">
+          <thead>
+            <tr>
+              <th>Food Type</th>
+              <th>Can Be Consumed After Sell-by/Use-by Date</th>
+              <th>Notes</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {filteredData.map((item, index) => (
+              <tr key={index}>
+                <td>{item.food}</td>
+                <td>{item.safety}</td>
+                <td>{item.notes}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 };
