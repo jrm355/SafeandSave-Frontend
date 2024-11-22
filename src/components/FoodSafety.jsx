@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import './FoodSafety.css'; // Ensure this file includes the scrollable container styles
+import './FoodSafety.css'; 
 
 const FoodSafety = () => {
-  // Extended food data
+  //Food Data
   const foodData = [
     { food: "Canned Goods", safety: "1-2 years", notes: "As long as the can is not damaged, bulging, or rusted." },
     { food: "Dry Goods (Pasta, Rice, etc.)", safety: "6 months to 1 year", notes: "Typically, dry pasta and rice last well beyond the date." },
@@ -42,7 +42,7 @@ const FoodSafety = () => {
   const [sortedData, setSortedData] = useState(foodData);
   const [sortOrder, setSortOrder] = useState("asc");
   const [searchQuery, setSearchQuery] = useState("");
-
+// sort 
   const handleSort = () => {
     const newSortOrder = sortOrder === "asc" ? "desc" : "asc";
     setSortOrder(newSortOrder);

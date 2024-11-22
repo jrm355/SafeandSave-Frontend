@@ -85,14 +85,15 @@ const DogSafety = () => {
       <div className="warning-disclaimer">
         <h3 className="warning-header">Warning:</h3>
         <p className="warning-message">
-          Before feeding your dog something new, check with a veterinarian. Start with small portions and monitor for reactions.
+          Before feeding your dog something new, check with a veterinarian.
+          Start with small portions and monitor for reactions. It is good practice to double check the accuracy of information.
         </p>
       </div>
 
       {/* Input Field */}
       <input
         type="text"
-        placeholder="Enter food item"
+        placeholder="Enter food to see if it's safe for a dog to eat"
         value={food}
         onChange={handleInputChange}
         className="input-field"

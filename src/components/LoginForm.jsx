@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
-
+// Initial login form commented out, Project layout changed, kept code in incase verification is included.
 const LoginForm = () => {
   // const [email, setEmail] = useState('');
   // const [password, setPassword] = useState('');
