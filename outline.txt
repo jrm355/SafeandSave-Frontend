@@ -1,0 +1,138 @@
+Capstone outlined
+
+Monday
+-Project proposal completed
+-Get files made and boiler plates
+-Get completed idea done
+-Get wireframes completed
+
+Tuesday
+-Work on Front End
+
+Wedensday 
+-Get a functioning Back End
+
+Thursday
+-Put everything together, debug, stylize 
+
+
+Friday
+-Any last minute stylization
+
+Front
+
+Fridge Friend
+Save money and eliminate food waste
+
+
+ON PANTRY PAGE
+Item
+	Location
+	Food Type
+	Expiration Date
+	Sell By date
+	Toss By
+	Ability to delete and add any item
+
+
+ON DOG PAGE
+Disclaimer 
+
+Whenever introducing a new food to your dog make sure to start by giving them a small amount and monitor them for at least 24 hours to check for allergic reaction, changes in bowel movements, energy levels, and appetitie
+
+All Foods included are singular ingrediants, NOT mixed with any other food (example peanut butter has sugar and oil, therefore it is not included). If you introduce a food mixed with anything else make sure to check each individual ingrediant. 
+
+
+ON ABOUT PAGE
+Before eating anything expired check the for signs of mold, coloring, and odd smells. This app is used as a guideline but there is always the risk of faulty food packaging and poor preparation
+
+This app is used to track foods in storage. Food can be consumed post sell by and expiration date as long as it doesn’t show signs of going bad.
+
+On the Pantry Page
+Simply input any foods you’ve purchased, as well as the expiration dates and you will be given a recommendation on when to toss the food
+
+On the Dog Safety Page
+Simply input a food and you will be given a recommendation whether it is safe for your dog to eat
+
+On Food Safety Page 
+Simply input a food and you will be given a recommendation on best storage practice and when to toss.
+
+
+FOOD SAFETY PAGE
+-Food
+-Toss if
+-Recommended Storage 
+
+
+Capstone outlined
+
+Monday
+-Project proposal completed
+-Get files made and boiler plates
+-Get completed idea done
+-Get wireframes completed
+
+Tuesday
+-Work on Front End
+
+Wedensday 
+-Get a functioning Back End
+
+Thursday
+-Put everything together, debug, stylize 
+
+
+Friday
+-Any last minute stylization
+
+
+
+Front
+
+Fridge Friend
+Save money and eliminate food waste
+
+
+ON PANTRY PAGE
+Item
+	Location
+	Food Type
+	Expiration Date
+	Sell By date
+	Toss By
+	Ability to delete and add any item
+
+
+ON DOG PAGE
+Disclaimer 
+
+Whenever introducing a new food to your dog make sure to start by giving them a small amount and monitor them for at least 24 hours to check for allergic reaction, changes in bowel movements, energy levels, and appetitie
+
+All Foods included are singular ingrediants, NOT mixed with any other food (example peanut butter has sugar and oil, therefore it is not included). If you introduce a food mixed with anything else make sure to check each individual ingrediant. 
+
+
+ON ABOUT PAGE
+Before eating anything expired check the for signs of mold, coloring, and odd smells. This app is used as a guideline but there is always the risk of faulty food packaging and poor preparation
+
+This app is used to track foods in storage. Food can be consumed post sell by and expiration date as long as it doesn’t show signs of going bad.
+
+On the Pantry Page
+Simply input any foods you’ve purchased, as well as the expiration dates and you will be given a recommendation on when to toss the food
+
+On the Dog Safety Page
+Simply input a food and you will be given a recommendation whether it is safe for your dog to eat
+
+On Food Safety Page 
+Simply input a food and you will be given a recommendation on best storage practice and when to toss.
+
+
+FOOD SAFETY PAGE
+-Food
+-Toss if
+-Recommended Storage 
+
+
+
+
+
+
