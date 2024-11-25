@@ -2,21 +2,25 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./Pantry.css";
 
+//Defining Pantry Commponent
 const Pantry = () => {
   const [pantryItems, setPantryItems] = useState([]);
   const [formData, setFormData] = useState({
     foodItem: "",
-    location: "Fridge", // Default dropdown option
-    foodType: "Fruits", // Default dropdown option
+    location: "Fridge", //  dropdown option
+    foodType: "Fruits", //  dropdown option
     sellBy: "",
     expiration: "",
     tossBy: "",
   });
   const [editingId, setEditingId] = useState(null);
+  // State to track if an item is being edited (store its ID)
+    // Effect to fetch pantry items from the server when the component mounts
 
   useEffect(() => {
     const fetchPantryItems = async () => {
       try {
+        //get request
         const response = await axios.get("http://localhost:3001/api/pantry");
         setPantryItems(response.data);
       } catch (error) {
@@ -25,16 +29,17 @@ const Pantry = () => {
     };
     fetchPantryItems();
   }, []);
-
+//handler to update form when values change
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
-
+//handler for form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       if (editingId) {
+        //update item if editing
         const response = await axios.put(`http://localhost:3001/api/pantry/${editingId}`, formData);
         setPantryItems(
           pantryItems.map((item) =>
@@ -50,7 +55,7 @@ const Pantry = () => {
       console.error("Error adding or updating pantry item:", error);
     }
   };
-
+//handle to delete by id
   const handleDelete = async (id) => {
     try {
       await axios.delete(`http://localhost:3001/api/pantry/${id}`);
@@ -59,19 +64,19 @@ const Pantry = () => {
       console.error("Error deleting pantry item:", error);
     }
   };
-
+//handle to populate form for editing
   const handleEdit = (item) => {
     setFormData({
       foodItem: item.foodItem,
       location: item.location,
       foodType: item.foodType,
-      sellBy: item.sellBy.split("T")[0],
+      sellBy: item.sellBy.split("T")[0], //only date portion
       expiration: item.expiration.split("T")[0],
       tossBy: item.tossBy.split("T")[0],
     });
     setEditingId(item._id);
   };
-
+//reset form
   const resetForm = () => {
     setFormData({
       foodItem: "",
@@ -83,9 +88,9 @@ const Pantry = () => {
     });
     setEditingId(null);
   };
-
+//function to format a date to a string
   const formatDate = (date) => new Date(date).toLocaleDateString("en-US");
-
+// pantry component
   return (
     <div className="pantry-container">
       <h1>Pantry Tracker</h1>
